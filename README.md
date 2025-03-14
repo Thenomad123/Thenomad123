@@ -801,3 +801,7 @@ export async function fetchFromGitHub(url, config = {}) {
     throw error;
   }
 }
+
+cd Thenomad123
+npm install
+REACT_APP_GITHUB_TOKEN=your_github_tokennpm startnpm test
