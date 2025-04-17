@@ -92,4 +92,36 @@ jobs:
       run: |
         curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
           -d chat_id="${TELEGRAM_CHAT_ID}" \
-          
+
+          {
+  // ...
+  "build": { "dockerfile": "Dockerfile" },
+  // ...
+}
+ARG VARIANT="16"
+FROM mcr.microsoft.com/devcontainers/javascript-node:1-${VARIANT}
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends bundler
+
+# [Optional] Uncomment if you want to install an additional version
+#  of node using nvm
+# ARG EXTRA_NODE_VERSION=18
+# RUN su node -c "source /usr/local/share/nvm/nvm.sh \
+#    && nvm install ${EXTRA_NODE_VERSION}"
+
+COPY ./script-in-your-repo.sh /tmp/scripts/script-in-codespace.sh
+RUN apt-get update && bash /tmp/scripts/script-in-codespace.sh
+build:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: user/app:latest
