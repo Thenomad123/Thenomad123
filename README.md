@@ -92,4 +92,4 @@ jobs:
       run: |
         curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
           -d chat_id="${TELEGRAM_CHAT_ID}" \
-          -d text="✅ Nowa wersja obrazu \`${{ steps.version.outputs.VERSION }}\` została zbudowana i opublikowana do GHCR. Sprawdź changelog w repozytorium."
+          
