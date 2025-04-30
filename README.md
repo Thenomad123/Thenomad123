@@ -251,27 +251,3 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 with open('file-change-frequency.json') as f:
-    freq = json.load(f)
-files = list(freq.keys())
-counts = [freq[f] for f in files]
-
-plt.figure()
-plt.barh(files, counts)
-plt.xlabel('Liczba zmian')
-plt.title('Frequency of Documentation File Changes')
-plt.tight_layout()
-plt.savefig('docs-heatmap.png')
-
-# predict_update.py
-# Stub: train a model to predict doc updates based on commit features
-
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-
-# Load historic commit metadata
-data = pd.read_json('commit-meta.json')
-X = data[['lines_added', 'lines_deleted', 'files_changed']]
-y = data['requires_update']  # boolean label
-model = RandomForestClassifier()
-model.fit(X, y)
-model.predict([[12, 3, 2]])  # example prediction
