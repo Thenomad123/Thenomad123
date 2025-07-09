@@ -250,4 +250,4 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open('file-change-frequency.json') as f:
+with open('file-change-frequency.json') as f:Motorola S-Record (format pliku .s19),
